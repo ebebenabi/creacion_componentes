@@ -3,16 +3,23 @@ package com.example.creacion_componentes;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import java.sql.*;
-import static com.example.creacion_componentes.HelloController.t;
-
+import java.util.ArrayList;
 
 public class TablasController {
     //@FXML public static TableView tabla;
     @FXML private TableView tv;
-    static int col = 0;
-    String table = t;
+    int col = 0;
+    String tabActual;
 
-    public static int columnas(Connection con, String table) {
+    public ArrayList<String> tablas = new ArrayList<>();
+    public ArrayList<String> columnas = new ArrayList<>();
+
+    public void vaciarArray() {
+        for (int i = 0; i < 4; i++) {
+            tablas.add(null);
+        }
+    }
+    public int columnas(Connection con, String table) {
         Statement stmt = null;
         ResultSet rs = null;
 

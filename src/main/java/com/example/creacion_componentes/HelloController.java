@@ -10,12 +10,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static com.example.creacion_componentes.TablasController.columnas;
-
 public class HelloController implements Initializable {
 
     @FXML public BbddController refBbddController;
-    //@FXML public TablasController refTablasController;
+    @FXML public TablasController refTablasController;
     @FXML public Pane panelBbdd;
     @FXML public Pane panelTablas;
     @FXML public Button btnVerTabla;
@@ -23,27 +21,8 @@ public class HelloController implements Initializable {
     @FXML public Button btnConectar;
     @FXML public Button btnCargar;
 
-    public ArrayList<String> columnas;
 
     Connection con = null;
-    static String t;
-
-    public ArrayList<String> tablas = new ArrayList<>();
-
-    public void vaciarArray() {
-        for (int i = 0; i < 4; i++) {
-            tablas.add(null);
-        }
-    }
-    public void verInicio() {
-        panelBbdd.setVisible(true);
-        panelTablas.setVisible(false);
-    }
-
-    public void verTabla() {
-        panelTablas.setVisible(true);
-        panelBbdd.setVisible(false);
-    }
 
     public void setCon(String url) {
         Connection con = null;
@@ -64,21 +43,24 @@ public class HelloController implements Initializable {
 
         DatabaseMetaData meta = con.getMetaData();
         ResultSet res = meta.getTables(null, "PUBLIC", null, new String[]{"TABLE"});
-        //vaciarArray();
+        refTablasController.vaciarArray();
         refBbddController.cbTabla.getItems().clear();
+        String aux;
         while (res.next()) {
-            refBbddController.cbTabla.getItems().add(res.getString(3));
+            aux = res.getString(3);
+            refBbddController.cbTabla.getItems().add(aux);
+            refTablasController.tablas.add(aux);
         }
     }
 
     @FXML
     public void onCargarButtonClick() throws SQLException {
-        t = (String) refBbddController.cbTabla.getValue();
-        columnas(con, t);
-        mapas(con, t);
+        refTablasController.tabActual = (String) refBbddController.cbTabla.getValue();
+        refTablasController.columnas(con, refTablasController.tabActual);
+        mapas(con, refTablasController.tabActual);
     }
 
-    public static void mapas(Connection con, String nCol) {
+    public void mapas(Connection con, String nCol) {
         //HashMap<String, String> map = new HashMap<>();
         //map.put("columna", "dato");
 
@@ -110,16 +92,19 @@ public class HelloController implements Initializable {
 
     @FXML
     public void onVerTablaButtonClick() {
-        verTabla();
+        panelTablas.setVisible(true);
+        panelBbdd.setVisible(false);
     }
 
     @FXML
     public void onVerInicioButtonClick() {
-        verInicio();
+        panelBbdd.setVisible(true);
+        panelTablas.setVisible(false);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        verInicio();
+        panelBbdd.setVisible(true);
+        panelTablas.setVisible(false);
     }
 }
