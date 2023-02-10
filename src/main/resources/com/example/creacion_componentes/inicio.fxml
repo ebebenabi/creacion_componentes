@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.creacion_componentes.HelloController">
+   <children>
+      <Button fx:id="btnVerBbdd" layoutX="15.0" layoutY="12.0" mnemonicParsing="false" onAction="#onVerInicioButtonClick" text="VOLVER A INICIO" />
+      <Button fx:id="btnVerTabla" layoutX="131.0" layoutY="12.0" mnemonicParsing="false" onAction="#onVerTablaButtonClick" prefHeight="25.0" prefWidth="109.0" text="VER TABLA" />
+
+      <Pane fx:id="panelBbdd" layoutX="15.0" layoutY="48.0" prefHeight="327.0" prefWidth="569.0">
+         <children>
+            <fx:include fx:id="refBbdd" source="./bbdd.fxml" />
+         </children>
+      </Pane>
+
+      <Pane fx:id="panelTablas" layoutX="15.0" layoutY="48.0" prefHeight="327.0" prefWidth="569.0">
+         <children>
+            <fx:include fx:id="refTablas" source="./tablas.fxml" />
+         </children>
+      </Pane>
+
+      <Button fx:id="btnConectar" layoutX="326.0" layoutY="362.0" mnemonicParsing="false" onAction="#onConectarButtonClick" prefHeight="25.0" prefWidth="93.0" text="CONECTAR" />
+      <Button fx:id="btnCargar" layoutX="225.0" layoutY="362.0" mnemonicParsing="false" onAction="#onCargarButtonClick" prefHeight="25.0" prefWidth="93.0" text="CARGAR" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="txtTabla" prefHeight="327.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.creacion_componentes.TablasController">
+   <children>
+      <TableView fx:id="tv" layoutX="14.0" layoutY="14.0" prefHeight="300.0" prefWidth="413.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+       <VBox layoutX="436.0" layoutY="14.0" prefHeight="300.0" prefWidth="125.0">
+           <children>
+               <fx:include fx:id="refCeldasControllerController" source="./celdas.fxml" />
+           </children>
+       </VBox>
+   </children>
+</AnchorPane>

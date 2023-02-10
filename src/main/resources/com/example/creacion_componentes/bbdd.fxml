@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="327.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.creacion_componentes.BbddController">
+   <children>
+      <TextField fx:id="txtBbdd" layoutX="53.0" layoutY="130.0" prefHeight="25.0" prefWidth="457.0" />
+      <ComboBox fx:id="cbTabla" layoutX="169.0" layoutY="164.0" prefHeight="25.0" prefWidth="226.0" />
+   </children>
+</AnchorPane>
