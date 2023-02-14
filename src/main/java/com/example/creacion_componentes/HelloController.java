@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
@@ -57,37 +58,7 @@ public class HelloController implements Initializable {
     public void onCargarButtonClick() throws SQLException {
         refTablasController.tabActual = (String) refBbddController.cbTabla.getValue();
         refTablasController.columnas(con, refTablasController.tabActual);
-        mapas(con, refTablasController.tabActual);
-    }
-
-    public void mapas(Connection con, String nCol) {
-        //HashMap<String, String> map = new HashMap<>();
-        //map.put("columna", "dato");
-
-        /*ResultSet result = null;
-        try {
-            PreparedStatement st = con.prepareStatement("SELECT * FROM usuarios");
-            result = st.executeQuery();
-
-            while (result.next()) {
-                System.out.println(result.getString("id_user"));
-                id = result.getInt("id_user");
-                nombre = result.getString("nombre");
-                usuario = result.getString("usuario");
-                contrasena = result.getString("contraseña");
-                cargo = result.getString("cargo");
-                fecha_alta = result.getString("fecha_alta");
-                fecha_baja = result.getString("fecha_baja");
-
-                HospitalUsers h = new HospitalUsers(id,nombre,usuario,contrasena,cargo,fecha_alta,fecha_baja);
-                hospital.add(h);
-            }
-
-            tvDatos.setItems(hospital);
-
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }*/
+        refTablasController.mapas(con, refTablasController.tabActual);
     }
 
     @FXML
