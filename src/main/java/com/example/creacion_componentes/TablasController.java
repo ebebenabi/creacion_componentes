@@ -1,13 +1,20 @@
 package com.example.creacion_componentes;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.MapValueFactory;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class TablasController {
-    @FXML private TableView tv;
+    //@FXML private TableView tv;
+    @FXML private TableView<HashMap<String, String>> tv;
     int col = 0;
     String tabActual;
 
@@ -45,24 +52,24 @@ public class TablasController {
         return col;
     }
 
-    public void mapas(Connection con, String nCol) throws SQLException {
-        HashMap<String, HashMap<String, String>> mapa = new HashMap<>();
+    public void mapas(Connection con) throws SQLException {
+        List<HashMap<String, String>> maps = new ArrayList<>();
         HashMap<String, String> map = new HashMap<>();
-        map.put("columna", "dato");
         String value;
         ResultSet result = null;
         try {
             PreparedStatement st = con.prepareStatement("SELECT * FROM " + tabActual);
             result = st.executeQuery();
-
+            int aux = 0;
             while (result.next()) {
+                aux++;
                 try {
                     for (int i = 0; i < columnas.size(); i++) {
                         value = result.getString(columnas.get(i));
                         map.put("col" + i, value);
                         System.out.println(value);
                     }
-                    mapa.put("registro", map);
+                    maps.add(map);
                 } catch (SQLException ex) {
                     System.err.println(ex.getMessage());
                 }
@@ -72,6 +79,14 @@ public class TablasController {
             throw new RuntimeException(e);
         }
 
+        for (int i = 0; i < columnas.size(); i++) {
+            TableColumn<HashMap<String, String>, Object> col = new TableColumn<>(columnas.get(i));
+            col.setCellValueFactory(new MapValueFactory(columnas.get(i)));
+            tv.getColumns().add(col);
+        }
+
+        ObservableList<HashMap<String, String>> data = FXCollections.observableList(maps);
+        tv.setItems(data);
     }
 
 }
