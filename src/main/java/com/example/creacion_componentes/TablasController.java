@@ -13,8 +13,8 @@ import java.util.List;
 
 public class TablasController {
     @FXML public CeldasController refCeldasController;
-    @FXML
-    TableView<List<String>> tv;
+    @FXML TableView<List<String>> tv;
+
     int col = 0;
     String tabActual;
 
@@ -93,7 +93,7 @@ public class TablasController {
         data.addAll(maps);
         tv.setItems(data);
 
-        refCeldasController.generarCb(columnas);
+        refCeldasController.generarCb(columnas, tv);
     }
 
 }
