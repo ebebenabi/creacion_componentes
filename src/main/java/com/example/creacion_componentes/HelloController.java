@@ -55,7 +55,7 @@ public class HelloController implements Initializable {
     }
 
     @FXML
-    public void onCargarButtonClick() throws SQLException {
+    public void onCargarButtonClick() {
         refTablasController.tabActual = (String) refBbddController.cbTabla.getValue();
         refTablasController.columnas(con, refTablasController.tabActual);
         refTablasController.mapas(con);

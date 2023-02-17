@@ -1,20 +1,18 @@
 package com.example.creacion_componentes;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.MapValueFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class TablasController {
-    //@FXML private TableView tv;
-    @FXML private TableView<HashMap<String, String>> tv;
+    @FXML private TableView<List<String>> tv;
     int col = 0;
     String tabActual;
 
@@ -52,9 +50,9 @@ public class TablasController {
         return col;
     }
 
-    public void mapas(Connection con) throws SQLException {
-        List<HashMap<String, String>> maps = new ArrayList<>();
-        HashMap<String, String> map = new HashMap<>();
+    public void mapas(Connection con) {
+        ArrayList<ArrayList<String>> maps = new ArrayList<>();
+
         String value;
         ResultSet result = null;
         try {
@@ -62,11 +60,12 @@ public class TablasController {
             result = st.executeQuery();
             int aux = 0;
             while (result.next()) {
+                ArrayList<String> map = new ArrayList<>();
                 aux++;
                 try {
                     for (int i = 0; i < columnas.size(); i++) {
                         value = result.getString(columnas.get(i));
-                        map.put("col" + i, value);
+                        map.add(value);
                         System.out.println(value);
                     }
                     maps.add(map);
@@ -80,12 +79,14 @@ public class TablasController {
         }
 
         for (int i = 0; i < columnas.size(); i++) {
-            TableColumn<HashMap<String, String>, Object> col = new TableColumn<>(columnas.get(i));
-            col.setCellValueFactory(new MapValueFactory(columnas.get(i)));
+            TableColumn<List<String>, String> col = new TableColumn<>(columnas.get(i));
+            int finalI1 = i;
+            col.setCellValueFactory(listStringCellDataFeatures -> new ReadOnlyStringWrapper(listStringCellDataFeatures.getValue().get(finalI1)));
             tv.getColumns().add(col);
         }
 
-        ObservableList<HashMap<String, String>> data = FXCollections.observableList(maps);
+        ObservableList<List<String>> data = FXCollections.observableArrayList();
+        data.addAll(maps);
         tv.setItems(data);
     }
 
