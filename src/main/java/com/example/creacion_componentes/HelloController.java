@@ -1,5 +1,6 @@
 package com.example.creacion_componentes;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -41,7 +42,6 @@ public class HelloController implements Initializable {
     @FXML
     public void onConectarButtonClick() throws SQLException {
         setCon(refBbddController.txtBbdd.getText());
-
         DatabaseMetaData meta = con.getMetaData();
         ResultSet res = meta.getTables(null, "PUBLIC", null, new String[]{"TABLE"});
         refTablasController.vaciarArray();

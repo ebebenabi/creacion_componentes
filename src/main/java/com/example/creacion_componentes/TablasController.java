@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TablasController {
-    @FXML private TableView<List<String>> tv;
+    @FXML public CeldasController refCeldasController;
+    @FXML
+    TableView<List<String>> tv;
     int col = 0;
     String tabActual;
 
@@ -51,6 +53,8 @@ public class TablasController {
     }
 
     public void mapas(Connection con) {
+        tv.setItems(FXCollections.emptyObservableList());
+        refCeldasController.vBox_celdas.getChildren().clear();
         ArrayList<ArrayList<String>> maps = new ArrayList<>();
 
         String value;
@@ -88,6 +92,8 @@ public class TablasController {
         ObservableList<List<String>> data = FXCollections.observableArrayList();
         data.addAll(maps);
         tv.setItems(data);
+
+        refCeldasController.generarCb(columnas);
     }
 
 }
