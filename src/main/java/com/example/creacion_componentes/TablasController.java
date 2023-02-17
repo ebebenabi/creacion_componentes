@@ -93,7 +93,7 @@ public class TablasController {
         data.addAll(maps);
         tv.setItems(data);
 
-        refCeldasController.generarCb(columnas, tv);
+        refCeldasController.generarCb(con, columnas, tv, tabActual);
     }
 
 }

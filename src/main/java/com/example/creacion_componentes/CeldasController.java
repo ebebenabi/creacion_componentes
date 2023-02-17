@@ -6,36 +6,54 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CeldasController {
     @FXML VBox vBox_celdas;
-    public void generarCb(ArrayList<String> columnas, TableView<List<String>> tv) {
+    public void generarCb(Connection con, ArrayList<String> columnas, TableView<List<String>> tv, String tabActual) {
         for (String columna : columnas) {
             CheckBox c = new CheckBox(columna);
             c.setOnAction(e -> {
                 if (c.isSelected()) {
-                    TableColumn col = buscarColumna(columna, tv);
-                    if (col != null) {
-                        tv.getColumns().remove(col);
-                    }
+                    seleccionado(c, tv);
                 } else {
-                    //Añadir columna
+                    deseleccionado(con, c, tabActual, tv);
                 }
             });
             vBox_celdas.getChildren().add(c);
         }
     }
 
-    private TableColumn buscarColumna(String nombreColumna, TableView tv) {
-        for (Object col : tv.getColumns()) {
-            if (((TableColumn)col).getText().equals(nombreColumna)) {
-                return (TableColumn)col;
+    private void seleccionado(CheckBox c, TableView<List<String>> tv) {
+        String nombreColumna = c.getText(); // Nombre de la columna que buscas
+        TableColumn<?, ?> columnaBuscada = null;
+        for (TableColumn<?, ?> col : tv.getColumns()) {
+            if (col.getText().equals(nombreColumna)) {
+                columnaBuscada = col;
+                break;
             }
         }
-        return null;
+        if (columnaBuscada != null) {
+            columnaBuscada.setVisible(false);
+        }
     }
 
-
+    private void deseleccionado(Connection con, CheckBox c, String tabActual, TableView<List<String>> tv) {
+        String nombreColumna = c.getText(); // Nombre de la columna que buscas
+        TableColumn<?, ?> columnaBuscada = null;
+        for (TableColumn<?, ?> col : tv.getColumns()) {
+            if (col.getText().equals(nombreColumna)) {
+                columnaBuscada = col;
+                break;
+            }
+        }
+        if (columnaBuscada != null) {
+            columnaBuscada.setVisible(true);
+        }
+    }
 }
