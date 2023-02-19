@@ -1,15 +1,12 @@
 package com.example.creacion_componentes;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-
 import java.net.URL;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
@@ -22,7 +19,7 @@ public class HelloController implements Initializable {
     @FXML public Button btnVerBbdd;
     @FXML public Button btnConectar;
     @FXML public Button btnCargar;
-
+    @FXML public Label lblMensaje;
 
     Connection con = null;
 
@@ -30,10 +27,10 @@ public class HelloController implements Initializable {
         Connection con = null;
         try{
             con = DriverManager.getConnection(url);
-            System.out.println("Conectado.");
+            lblMensaje.setText("Conectado.");
         } catch (Exception ex) {
-            System.err.println( ex.getClass().getName() + ": " + ex.getMessage() );
-            System.out.println("Error en la conexión.");
+            System.err.println( ex.getClass().getName() + ": " + ex.getMessage());
+            lblMensaje.setText("Error en la conexión.");
         }
 
         this.con = con;
@@ -56,6 +53,7 @@ public class HelloController implements Initializable {
 
     @FXML
     public void onCargarButtonClick() {
+        lblMensaje.setText("Tablas cargadas.");
         refTablasController.tabActual = (String) refBbddController.cbTabla.getValue();
         refTablasController.columnas(con, refTablasController.tabActual);
         refTablasController.mapas(con);
@@ -67,6 +65,7 @@ public class HelloController implements Initializable {
     public void onVerTablaButtonClick() {
         panelTablas.setVisible(true);
         panelBbdd.setVisible(false);
+        lblMensaje.setVisible(false);
     }
 
     @FXML
@@ -79,5 +78,6 @@ public class HelloController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         panelBbdd.setVisible(true);
         panelTablas.setVisible(false);
+        lblMensaje.setVisible(true);
     }
 }

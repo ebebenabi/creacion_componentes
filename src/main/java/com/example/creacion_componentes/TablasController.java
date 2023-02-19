@@ -45,12 +45,10 @@ public class TablasController {
             for (int i = 1; i <= colCount; i++){
                 String colName = rsmd.getColumnName(i);
                 columnas.add(colName);
-                System.out.println(colName);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("NÚMERO DE COLUMNAS: " + col);
         return col;
     }
 
@@ -72,13 +70,11 @@ public class TablasController {
                     for (int i = 0; i < columnas.size(); i++) {
                         value = result.getString(String.valueOf(columnas.get(i)));
                         map.add(value);
-                        System.out.println(value);
                     }
                     maps.add(map);
                 } catch (SQLException ex) {
                     System.err.println(ex.getMessage());
                 }
-                System.out.println();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -95,6 +91,6 @@ public class TablasController {
         data.addAll(maps);
         tv.setItems(data);
 
-        refCeldasController.generarCb(con, columnas, tv, tabActual);
+        refCeldasController.generarCb(con, columnas, tv);
     }
 }

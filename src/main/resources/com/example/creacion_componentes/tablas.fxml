@@ -6,7 +6,7 @@
 
 <AnchorPane fx:id="txtTabla" prefHeight="327.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.creacion_componentes.TablasController">
    <children>
-      <TableView fx:id="tv" layoutX="14.0" layoutY="64.0" prefHeight="222.0" prefWidth="375.0">
+      <TableView fx:id="tv" layoutX="14.0" layoutY="64.0" prefHeight="222.0" prefWidth="375.0" style="-fx-background-radius: 12;">
         <columns>
         </columns>
       </TableView>
@@ -15,7 +15,7 @@
                <fx:include fx:id="refCeldas" source="./celdas.fxml" />
            </children>
        </VBox>
-      <Label fx:id="lblTabla" layoutX="14.0" layoutY="14.0" prefHeight="38.0" prefWidth="318.0" text="NOMBRE DE LA TABLA">
+      <Label fx:id="lblTabla" layoutX="14.0" layoutY="14.0" prefHeight="38.0" prefWidth="318.0" text="NOMBRE DE LA TABLA" textFill="#244a2f">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="17.0" />
          </font>
