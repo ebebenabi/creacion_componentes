@@ -68,7 +68,7 @@ public class TablasController {
                 aux++;
                 try {
                     for (int i = 0; i < columnas.size(); i++) {
-                        value = result.getString(columnas.get(i));
+                        value = result.getString(String.valueOf(columnas.get(i)));
                         map.add(value);
                         System.out.println(value);
                     }
@@ -95,5 +95,4 @@ public class TablasController {
 
         refCeldasController.generarCb(con, columnas, tv, tabActual);
     }
-
 }
