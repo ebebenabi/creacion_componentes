@@ -22,5 +22,7 @@
 
       <Button fx:id="btnConectar" layoutX="326.0" layoutY="362.0" mnemonicParsing="false" onAction="#onConectarButtonClick" prefHeight="25.0" prefWidth="93.0" text="CONECTAR" />
       <Button fx:id="btnCargar" layoutX="225.0" layoutY="362.0" mnemonicParsing="false" onAction="#onCargarButtonClick" prefHeight="25.0" prefWidth="93.0" text="CARGAR" />
+      <Separator layoutX="18.0" layoutY="42.0" prefHeight="6.0" prefWidth="569.0" />
+      <Separator layoutX="18.0" layoutY="350.0" prefHeight="6.0" prefWidth="569.0" />
    </children>
 </AnchorPane>

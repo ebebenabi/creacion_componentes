@@ -59,6 +59,8 @@ public class HelloController implements Initializable {
         refTablasController.tabActual = (String) refBbddController.cbTabla.getValue();
         refTablasController.columnas(con, refTablasController.tabActual);
         refTablasController.mapas(con);
+        refTablasController.lblTabla.setText(refTablasController.tabActual.toUpperCase());
+
     }
 
     @FXML
